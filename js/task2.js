@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log("ready!");
     let html = `<h2>First name: ` + localStorage.getItem("first_name") + `</h2>
                 <h2>Last name: `+ localStorage.getItem("last_name") + `</h2>
                 <h2>Email: `+ localStorage.getItem("email") + `</h2>
