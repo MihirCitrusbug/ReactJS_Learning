@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form validation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/task2.css">
+</head>
+
+<body>
+    <form id="regForm" action="info.html" action="post">
+
+        <h1>Step Form</h1>
+
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">Enter your Name:
+            <p><input placeholder="First name" id="first_name" oninput="name_validation()"></p>
+            <p><input placeholder="Last name" id="last_name" oninput="name_validation()"></p>
+        </div>
+
+        <div class="tab">Enter your Email:
+            <p><input placeholder="E-mail" id="email" oninput="email_validation()"></p>
+        </div>
+
+        <div class="tab">Select Gender:
+            <input type="radio" name="gender" onclick="myFunction(this.value)" value="male">Male</br>
+            <input type="radio" name="gender" onclick="myFunction(this.value)" value="female">Female
+            <input type="radio" name="gender" onclick="myFunction(this.value)" value="other">Other
+        </div>
+
+        <div class="tab">Enter your age:
+            <p><input type="number" id="age" placeholder="Age"></p>
+        </div>
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="nextBtn" disabled onclick="nextPrev(1)">Next</button>
+                <button type="submit" id="submit_btn" style="display: none;">Submit</button>
+            </div>
+        </div>
+
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+
+    </form>
+</body>
+<script src="js/jquery-3.min.js"></script>
+<script src="js/sweetalert2.all.min.js"></script>
+<script src="js/task2.js"></script>
+
+</html>
