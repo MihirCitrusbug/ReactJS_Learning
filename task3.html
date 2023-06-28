@@ -15,33 +15,33 @@
     <button id="showButton" disabled>Show</button>
     <button id="animate">Animate</button>
     <button onclick="window.location.reload()">Reset</button>
-    <script src="js/jquery-3.min.js"></script>
-    <script>
-
-        // Hide button click event
-        $('#hideButton').click(function () {
-            $("#myHeading").hide();
-            $(this).prop('disabled', true)
-            $("#showButton").prop('disabled', false)
-        });
-
-        // Show button click event
-        $('#showButton').click(function () {
-            $("#myHeading").show();
-            $(this).prop('disabled', true)
-            $("#hideButton").prop('disabled', false)
-        });
-
-        // Animate button click event
-        $("#animate").on("click", function () {
-            $("#myHeading").animate({
-                left: '250px',
-                opacity: '0.9',
-                height: '150px',
-                width: '150px'
-            });
-        })
-    </script>
 </body>
+<script src="js/jquery-3.min.js"></script>
+<script>
+
+    // Hide button click event
+    $('#hideButton').click(function () {
+        $("#myHeading").hide();
+        $(this).prop('disabled', true)
+        $("#showButton").prop('disabled', false)
+    });
+
+    // Show button click event
+    $('#showButton').click(function () {
+        $("#myHeading").show();
+        $(this).prop('disabled', true)
+        $("#hideButton").prop('disabled', false)
+    });
+
+    // Animate button click event
+    $("#animate").on("click", function () {
+        $("#myHeading").animate({
+            left: '250px',
+            opacity: '0.9',
+            height: '150px',
+            width: '150px'
+        });
+    })
+</script>
 
 </html>
