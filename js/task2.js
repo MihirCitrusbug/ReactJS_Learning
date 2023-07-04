@@ -105,18 +105,15 @@ function myFunction(gender) {
 function age_validation() {
     const age = parseFloat(document.getElementById("age").value.trim());
     if (age === "" || age === null || isNaN(age)) {
-        console.log("inside if")
         document.getElementById("submit_btn").disabled = true;
     }
     else if (age < 1) {
-        console.log("inside else if")
         document.getElementById("submit_btn").disabled = true;
-        localStorage.setItem("age", age);
         document.getElementById("age").classList.add("invalid");
     }
     else {
-        console.log("inside else")
         document.getElementById("submit_btn").disabled = false;
         document.getElementById("age").classList.remove("invalid");
+        localStorage.setItem("age", age);
     }
 }
