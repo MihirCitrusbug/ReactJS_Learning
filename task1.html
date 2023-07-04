@@ -16,33 +16,35 @@
             </center>
             <hr>
             <label> First name </label>
-            <input type="text" id="first_name" placeholder="First name" size="15" required />
+            <input type="text" id="first_name" oninput="first_name_validation()" placeholder="First name" size="15"
+                required />
             <span class="error-msg" id="first_name_error">this field is required</span></br>
 
             <label> Last name: </label>
-            <input type="text" id="last_name" placeholder="Last name" size="15" required />
+            <input type="text" id="last_name" oninput="last_name_validation()" placeholder="Last name" size="15"
+                required />
             <span class="error-msg" id="last_name_error">this field is required</span></br>
 
             <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" id="email" required>
+            <input type="text" oninput="email_validation()" placeholder="Enter Email" id="email" required>
             <span class="error-msg" id="email_error"></span></br>
 
             <label>Phone</label>
-            <input type="number" id="phoneNo" placeholder="phone no." size="10" / required>
+            <input type="number" id="phoneNo" oninput="phoneNo_validation()" placeholder="phone no." size="10" /
+                required>
             <span class="error-msg" id="phoneNo_error"></span></br>
 
             <label>Zip code</label>
-            <input type="number" id="zipcode" placeholder="Zip code" size="6" / required>
+            <input type="number" id="zipcode" oninput="zipcode_validation()" placeholder="Zip code" size="6" / required>
             <span class="error-msg" id="zipcode_error">this field is required</span></br>
 
             <label>Date of Birth</label>
-            <input type="date" id="dob" />
+            <input type="date" oninput="dob_validation()" id="dob" />
             <span class="error-msg" id="dob_error">this field is required</span></br>
 
-            <button type="button" id="submit_btn" class="registerbtn">Submit</button>
+            <button type="button" onclick="submit_fuc()" id="submit_btn23" class="registerbtn">Submit</button>
     </form>
 </body>
-<script src="js/jquery-3.min.js"></script>
 <script src="js/sweetalert2.all.min.js"></script>
 <script src="js/task1.js"></script>
 

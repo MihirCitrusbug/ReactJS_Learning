@@ -2,9 +2,8 @@
 <html>
 
 <head>
-    <title>Form validation</title>
+    <title>Steps Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/task2.css">
 </head>
 
@@ -15,29 +14,34 @@
 
         <!-- One "tab" for each step in the form: -->
         <div class="tab">Enter your Name:
-            <p><input placeholder="First name" id="first_name" oninput="name_validation()"></p>
-            <p><input placeholder="Last name" id="last_name" oninput="name_validation()"></p>
+            <p><input type="text" placeholder="First name" id="first_name" oninput="name_validation()"></p>
+            <p><input type="text" placeholder="Last name" id="last_name" oninput="name_validation()"></p>
         </div>
 
         <div class="tab">Enter your Email:
-            <p><input placeholder="E-mail" id="email" oninput="email_validation()"></p>
+            <p><input type="email" placeholder="E-mail" id="email" oninput="email_validation()"></p>
         </div>
 
-        <div class="tab">Select Gender:
-            <input type="radio" name="gender" onclick="myFunction(this.value)" value="male">Male</br>
-            <input type="radio" name="gender" onclick="myFunction(this.value)" value="female">Female
-            <input type="radio" name="gender" onclick="myFunction(this.value)" value="other">Other
+        <div class="tab">
+            <p>Select Gender:</p>
+            <input type="radio" onclick="myFunction(this.value)" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" onclick="myFunction(this.value)" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <input type="radio" onclick="myFunction(this.value)" id="other" name="gender" value="other">
+            <label for="other">Other</label><br><br>
+            <span class="error-msg" id="gender_error">Please select gender</span></br>
         </div>
 
         <div class="tab">Enter your age:
-            <p><input type="number" id="age" placeholder="Age"></p>
+            <p><input type="number" oninput="age_validation()" id="age" placeholder="Age"></p>
         </div>
 
         <div style="overflow:auto;">
             <div style="float:right;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                <button type="button" id="nextBtn" disabled onclick="nextPrev(1)">Next</button>
-                <button type="submit" id="submit_btn" style="display: none;">Submit</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <button type="submit" id="submit_btn" disabled style="display: none;">Submit</button>
             </div>
         </div>
 
@@ -51,8 +55,6 @@
 
     </form>
 </body>
-<script src="js/jquery-3.min.js"></script>
-<script src="js/sweetalert2.all.min.js"></script>
 <script src="js/task2.js"></script>
 
 </html>

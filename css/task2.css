@@ -51,3 +51,13 @@ input.invalid {
 .step.finish {
     background-color: #04AA6D;
 }
+
+.error-msg {
+    text-align: left;
+    color: #ee3535;
+    font-weight: 600;
+    min-width: 422px;
+    max-width: 422px;
+    display: none;
+    width: 422px;
+}

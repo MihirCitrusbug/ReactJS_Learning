@@ -4,15 +4,20 @@
 <head>
     <title>Information Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/task2.css">
 </head>
 
 <body id="information_body">
     <h1>User Information</h1>
 </body>
-<script src="js/jquery-3.min.js"></script>
-<script src="js/sweetalert2.all.min.js"></script>
-<script src="js/task2.js"></script>
+<script>
+    let html = `<h2>First name: ` + localStorage.getItem("first_name") + `</h2>
+                <h2>Last name: `+ localStorage.getItem("last_name") + `</h2>
+                <h2>Email: `+ localStorage.getItem("email") + `</h2>
+                <h2>Gender: `+ localStorage.getItem("gender") + `</h2>
+                <h2>Age: `+ localStorage.getItem("age") + `</h2>`
+
+    document.getElementById("information_body").innerHTML = html
+</script>
 
 </html>
