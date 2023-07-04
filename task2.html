@@ -13,27 +13,33 @@
         <h1>Step Form</h1>
 
         <!-- One "tab" for each step in the form: -->
-        <div class="tab">Enter your Name:
+        <div class="tab">Enter your Name
             <p><input type="text" placeholder="First name" id="first_name" oninput="name_validation()"></p>
             <p><input type="text" placeholder="Last name" id="last_name" oninput="name_validation()"></p>
         </div>
 
-        <div class="tab">Enter your Email:
+        <div class="tab">Enter your Email
             <p><input type="email" placeholder="E-mail" id="email" oninput="email_validation()"></p>
         </div>
 
         <div class="tab">
-            <p>Select Gender:</p>
-            <input type="radio" onclick="myFunction(this.value)" id="male" name="gender" value="male">
-            <label for="male">Male</label><br>
-            <input type="radio" onclick="myFunction(this.value)" id="female" name="gender" value="female">
-            <label for="female">Female</label><br>
-            <input type="radio" onclick="myFunction(this.value)" id="other" name="gender" value="other">
-            <label for="other">Other</label><br><br>
+            <p>Select Gender</p>
+            <div class="radio-btn">
+                <input type="radio" onclick="myFunction(this.value)" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+            </div>
+            <div class="radio-btn">
+                <input type="radio" onclick="myFunction(this.value)" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+            <div class="radio-btn">
+                <input type="radio" onclick="myFunction(this.value)" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+            </div>
             <span class="error-msg" id="gender_error">Please select gender</span></br>
         </div>
 
-        <div class="tab">Enter your age:
+        <div class="tab">Enter your age
             <p><input type="number" oninput="age_validation()" id="age" placeholder="Age"></p>
         </div>
 
