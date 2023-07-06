@@ -17,7 +17,7 @@
             <!-- * First name -->
             <div class="mb-3">
                 <label for="firstName" class="form-label">First name</label>
-                <input type="text" oninput="firstNameValidation()" class="form-control" id="firstName">
+                <input type="text" maxlength="20" oninput="firstNameValidation()" class="form-control" id="firstName">
                 <div id="firstNameRequiredError" class="invalid-feedback">
                     First name is required.
                 </div>
@@ -27,7 +27,7 @@
             <!-- * Last name -->
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last name</label>
-                <input type="text" oninput="lastNameValidation()" class="form-control" id="lastName">
+                <input type="text" maxlength="20" oninput="lastNameValidation()" class="form-control" id="lastName">
                 <div id="lastNameRequiredError" class="invalid-feedback">
                     Last name is required.
                 </div>
@@ -36,7 +36,7 @@
             <!-- * Email -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" oninput="emailValidation()" class="form-control" id="email">
+                <input type="email" maxlength="50" oninput="emailValidation()" class="form-control" id="email">
                 <div id="emailRequiredError" class="invalid-feedback">
                     Email is required.
                 </div>
@@ -48,7 +48,7 @@
             <!-- * Phone no -->
             <div class="mb-3">
                 <label for="phoneNo" class="form-label">Phone no.</label>
-                <input type="number" oninput="phoneNoValidation()" id="phoneNo" class="form-control">
+                <input type="number" maxlength="10" oninput="phoneNoValidation()" id="phoneNo" class="form-control">
                 <div id="phoneNoRequiredError" class="invalid-feedback">
                     Phone No is required.
                 </div>
