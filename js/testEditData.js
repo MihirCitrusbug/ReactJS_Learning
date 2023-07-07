@@ -7,25 +7,19 @@ let emails = params[params.length - 1].split(',')
 const sliderEditForm = document.querySelector('.sliderEditForm')
 
 // * Selected Technology data
-const selectedTechnology = (id, technology) => {
+const selectedTechnology = async (id, technology) => {
     const technologyOpt = document.getElementById(id).querySelectorAll('option')
     for (let i = 0; i < technologyOpt.length; i++) {
         if (technology.split(',').includes(technologyOpt[i].value)) {
-            console.log(`${technologyOpt[i].value} is selected`)
+            let html = `<a class="ui label transition visible" data-value="${technologyOpt[i].value}" style="display: inline-block !important;">${technologyOpt[i].value}<i class="delete icon"></i></a>`
+            $(html).insertAfter(document.getElementById(id));
             technologyOpt[i].selected = true
         }
     }
-    // for (let elm of technologyOpt) {
-    //     if (technology.split(',').includes(elm.value)) {
-    //         console.log('elm=', elm.value)
-    //         console.log(`${elm.value} is selected`)
-    //         elm.selected = true
-    //     }
-    // }
 }
 
 // * Selected Hobby data
-const selectHobby = (selector, hobby) => {
+const selectHobby = async (selector, hobby) => {
     const hobbyListElem = document.querySelectorAll(selector)
     hobbyListElem.forEach(element => {
         if (hobby.split(',').includes(element.value)) {
@@ -35,7 +29,7 @@ const selectHobby = (selector, hobby) => {
 }
 
 // * Selected Gender
-const selectGender = (selector, gender) => {
+const selectGender = async (selector, gender) => {
     const genderListElem = document.querySelectorAll(selector)
     genderListElem.forEach(element => {
         if (element.value == gender) {
@@ -45,7 +39,7 @@ const selectGender = (selector, gender) => {
 }
 
 // * Create Dynamic form for update data
-emails.forEach((email, index) => {
+emails.map(async (email, index) => {
     let myData = JSON.parse(localStorage.getItem(email))
     let activeClass = index === 0 ? 'active' : ''
     const nextBtn = document.getElementById('nextBtn')
@@ -56,35 +50,38 @@ emails.forEach((email, index) => {
                     <form class="container" method="post" id="${myData.email}" action="" novalidate>
                         <div class="mb-3">
                             <label for="firstName" class="form-label">First name</label>
-                            <input type="text" maxlength="20" oninput="firstNameValidation(this, 'firstNameRequiredError_${myData.email}')" value="${myData.firstName}" class="form-control" id="firstName">
+                            <input type="text" oninput="firstNameValidation(this, 'firstNameRequiredError_${myData.email}', 'firstNameMaxLengthError_${myData.email}')" value="${myData.firstName}" class="form-control" id="firstName">
                             <div id="firstNameRequiredError_${myData.email}" class="invalid-feedback">
                                 First name is required.
+                            </div>
+                            <div id="firstNameMaxLengthError_${myData.email}" class="invalid-feedback">
+                                Max 20 character.
                             </div>
 
                         </div>
 
                         <div class="mb-3">
                             <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" maxlength="20" oninput="lastNameValidation(this, 'lastNameRequiredError_${myData.email}')" value="${myData.lastName}" class="form-control" id="lastName">
+                            <input type="text" oninput="lastNameValidation(this, 'lastNameRequiredError_${myData.email}', 'lastNameMaxLengthError_${myData.email}')" value="${myData.lastName}" class="form-control" id="lastName">
                             <div id="lastNameRequiredError_${myData.email}" class="invalid-feedback">
                                 Last name is required.
+                            </div>
+                            <div id="lastNameMaxLengthError_${myData.email}" class="invalid-feedback">
+                                Max 20 character.
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" maxlength="50" disabled value="${myData.email}" class="form-control" id="email">
+                            <input type="email" disabled value="${myData.email}" class="form-control" id="email">
                             <div id="emailRequiredError" class="invalid-feedback">
                                 Email is required.
-                            </div>
-                            <div id="emailInvalidError" class="invalid-feedback">
-                                Invalid E-mail address!
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="phoneNo" class="form-label">Phone no.</label>
-                            <input type="number" maxlength="10" oninput="phoneNoValidation(this, 'phoneNoRequiredError_${myData.email}', 'phoneNoInvalidError_${myData.email}')" value="${myData.phoneNo}" id="phoneNo" class="form-control">
+                            <label for="phoneNo" class="form-label">Phone no.</label><br>
+                            <input type="number" oninput="phoneNoValidation(this, 'phoneNoRequiredError_${myData.email}', 'phoneNoInvalidError_${myData.email}')" value="${myData.phoneNo.split(' ').slice(-1)[0]}" name="phoneNo" id="phoneNo${index}" class="form-control">
                             <div id="phoneNoRequiredError_${myData.email}" class="invalid-feedback">
                                 Phone No is required.
                             </div>
@@ -95,17 +92,17 @@ emails.forEach((email, index) => {
 
                         <label class="form-label">Gender</label>
                         <div class="input-group mb-3">
-                            <div class="form-check m-0">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onchange="genderValidation('gender_${myData.email}', 'genderRequiredError_${myData.email}')" type="radio" email="${myData.email}" name="gender_${myData.email}"
                                     id="male" value="male">
                                 <label class="form-check-label" for="male">Male</label>
                             </div>
-                            <div class="form-check ms-2">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onchange="genderValidation('gender_${myData.email}', 'genderRequiredError_${myData.email}')" type="radio" email="${myData.email}" name="gender_${myData.email}"
                                     id="female" value="female">
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
-                            <div class="form-check ms-2">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onchange="genderValidation('gender_${myData.email}', 'genderRequiredError_${myData.email}')" type="radio" email="${myData.email}" name="gender_${myData.email}"
                                     id="other" value="other">
                                 <label class="form-check-label" for="other">Other</label>
@@ -115,24 +112,42 @@ emails.forEach((email, index) => {
                             </div>
                         </div>
 
+                        <div class="row  mb-3 ">
+                            <div class="col-lg-4 col-md-6 d-flex  align-items-center">
+                                <div class="inline w-100 field">
+                                    <label>Technology</label>
+                                    <select class="label ui selection fluid dropdown" onchange="technologyValidation('technology_${myData.email}', 'technologyRequiredError_${myData.email}')" name="technology" id="technology_${myData.email}" multiple>
+                                        <option value="python">Python</option>
+                                        <option value="php">PHP</option>
+                                        <option value="html">HTML</option>
+                                        <option value="css">CSS</option>
+                                        <option value="javascript">JavaScript</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="technologyRequiredError_${myData.email}" class="invalid-feedback">
+                            Please select any one technology!
+                        </div>
+
                         <label class="form-label">Hobby</label>
                         <div class="input-group mb-3">
-                            <div class="form-check">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onclick="hobbyValidation('hobby_${myData.email}', 'hobbyRequiredError_${myData.email}')" type="checkbox" name="hobby_${myData.email}"
                                     value="cricket" id="cricket">
                                 <label class="form-check-label" for="cricket">Cricket</label>
                             </div>
-                            <div class="form-check ms-2">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onclick="hobbyValidation('hobby_${myData.email}', 'hobbyRequiredError_${myData.email}')" type="checkbox" name="hobby_${myData.email}"
                                     value="reading" id="reading">
                                 <label class="form-check-label" for="reading">Reading</label>
                             </div>
-                            <div class="form-check ms-2">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onclick="hobbyValidation('hobby_${myData.email}', 'hobbyRequiredError_${myData.email}')" type="checkbox" name="hobby_${myData.email}"
                                     value="traveling" id="traveling">
                                 <label class="form-check-label" for="traveling">Traveling</label>
                             </div>
-                            <div class="form-check ms-2">
+                            <div class="form-check ml-3">
                                 <input class="form-check-input" onclick="hobbyValidation('hobby_${myData.email}', 'hobbyRequiredError_${myData.email}')" type="checkbox" name="hobby_${myData.email}"
                                     value="movies" id="movies">
                                 <label class="form-check-label" for="movies">Movies</label>
@@ -140,52 +155,64 @@ emails.forEach((email, index) => {
                             <div id="hobbyRequiredError_${myData.email}" class="invalid-feedback">
                                 Please select any one Hobby!
                             </div>
-                        </div>
-
-                        <label class="form-label">Technology</label>
-                        <select class="form-select mb-3" onclick="technologyValidation('technology_${myData.email}', 'technologyRequiredError_${myData.email}')" name="technology" id="technology_${myData.email}"
-                            multiple>
-                            <option value="python">Python</option>
-                            <option value="php">PHP</option>
-                            <option value="html">HTML</option>
-                            <option value="css">CSS</option>
-                            <option value="javascript">JavaScript</option>
-                        </select>
-                        <div id="technologyRequiredError_${myData.email}" class="invalid-feedback">
-                            Please select any one technology!
-                        </div>
+                        </div>    
+                        
                         <button type="button" onclick="updateForm(this)" email="${myData.email}" class="btn btn-success">Update</button>
                     </form>
                 </div>`
     sliderEditForm.innerHTML += html
-    selectedTechnology(`technology_${myData.email}`, myData.technology)
-    selectHobby(`input[name="hobby_${myData.email}"]`, myData.hobby)
-    selectGender(`input[name="gender_${myData.email}"]`, myData.gender)
+    setTimeout(async () => {
+        await selectGender(`input[name="gender_${myData.email}"]`, myData.gender);
+        await selectHobby(`input[name="hobby_${myData.email}"]`, myData.hobby);
+        await selectedTechnology(`technology_${myData.email}`, myData.technology);
+        const phoneInputField = document.querySelector(`#phoneNo${index}`);
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            utilsScript:
+                "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    }, 1);
 
 })
 
 // * First name validation
-function firstNameValidation(elem, elemRequiredError) {
+function firstNameValidation(elem, elemRequiredError, elemMaxLengthError) {
     const firstName = elem.value.trim();
     const firstNameRequiredError = document.getElementById(elemRequiredError)
+    const firstNameMaxLengthError = document.getElementById(elemMaxLengthError)
+
     if (firstName === "") {
+        firstNameMaxLengthError ? firstNameMaxLengthError.style.display = "none" : '';
         firstNameRequiredError.style.display = "block";
         return false;
     } else {
+        if (firstName.length > 20) {
+            firstNameRequiredError ? firstNameRequiredError.style.display = "none" : '';
+            firstNameMaxLengthError ? firstNameMaxLengthError.style.display = "block" : '';
+            return false;
+        }
+        firstNameMaxLengthError ? firstNameMaxLengthError.style.display = "none" : '';
         firstNameRequiredError ? firstNameRequiredError.style.display = "none" : '';
         return firstName;
     }
 }
 
 // * Last name validation
-function lastNameValidation(elem, elemRequiredError) {
+function lastNameValidation(elem, elemRequiredError, elemMaxLengthError) {
     const lastName = elem.value.trim();
     const lastNameRequiredError = document.getElementById(elemRequiredError);
+    const lastNameMaxLengthError = document.getElementById(elemMaxLengthError)
 
     if (lastName === "") {
+        lastNameMaxLengthError ? lastNameMaxLengthError.style.display = "none" : '';
         lastNameRequiredError.style.display = "block";
         return false;
     } else {
+        if (lastName.length > 20) {
+            lastNameRequiredError ? lastNameRequiredError.style.display = "none" : '';
+            lastNameMaxLengthError ? lastNameMaxLengthError.style.display = "block" : '';
+            return false;
+        }
+        lastNameMaxLengthError ? lastNameMaxLengthError.style.display = "none" : '';
         lastNameRequiredError ? lastNameRequiredError.style.display = "none" : '';
         return lastName;
     }
@@ -272,19 +299,12 @@ function updateForm(elem) {
 
     const firstName = firstNameValidation(form.querySelector('input[id="firstName"'), null);
     const lastName = lastNameValidation(form.querySelector('input[id="lastName"'), null);
-    const phoneNo = phoneNoValidation(form.querySelector('input[id="phoneNo"'), null, null);
+    const phoneNo = phoneNoValidation(form.querySelector('input[name="phoneNo"'), null, null);
     const gender = genderValidation(`gender_${userEmail}`, null);
     const hobby = hobbyValidation(`hobby_${userEmail}`, null);
     const technology = technologyValidation(form.querySelector('select').id, null);
 
-    // * consoles for debugging
-    console.log('email =', userEmail)
-    console.log('firstName =', firstName)
-    console.log('lastName =', lastName)
-    console.log('phoneNo =', phoneNo)
-    console.log('gender =', gender)
-    console.log('hobby =', hobby)
-    console.log('technology =', technology)
+    // * Validate every field  
     if (firstName && lastName && phoneNo && gender && hobby && technology) {
         const data = {
             firstName: firstName,

@@ -3,11 +3,19 @@
 function firstNameValidation() {
     const firstName = document.getElementById('firstName').value.trim();
     const firstNameRequiredError = document.getElementById("firstNameRequiredError");
+    const firstNameMaxLengthError = document.getElementById("firstNameMaxLengthError");
 
     if (firstName === "") {
+        firstNameMaxLengthError.style.display = "none";
         firstNameRequiredError.style.display = "block";
         return false;
     } else {
+        if (firstName.length > 20) {
+            firstNameRequiredError.style.display = "none";
+            firstNameMaxLengthError.style.display = "block";
+            return false;
+        }
+        firstNameMaxLengthError.style.display = "none";
         firstNameRequiredError.style.display = "none";
         return firstName;
     }
@@ -17,12 +25,20 @@ function firstNameValidation() {
 function lastNameValidation() {
     const lastName = document.getElementById('lastName').value.trim();
     const lastNameRequiredError = document.getElementById("lastNameRequiredError");
+    const lastNameMaxLengthError = document.getElementById("lastNameMaxLengthError");
 
     if (lastName === "") {
+        lastNameMaxLengthError.style.display = "none";
         lastNameRequiredError.style.display = "block";
         return false;
     } else {
+        if (lastName.length > 20) {
+            lastNameRequiredError.style.display = "none";
+            lastNameMaxLengthError.style.display = "block";
+            return false;
+        }
         lastNameRequiredError.style.display = "none";
+        lastNameMaxLengthError.style.display = "none";
         return lastName;
     }
 }
@@ -33,15 +49,23 @@ function emailValidation() {
     const email = document.getElementById('email').value.trim();
     const emailRequiredError = document.getElementById("emailRequiredError")
     const emailInvalidError = document.getElementById("emailInvalidError")
+    const emailMaxLengthError = document.getElementById("emailMaxLengthError")
 
     if (email == "" || email == null) {
         emailRequiredError.style.display = "block"
         emailInvalidError.style.display = "none"
+        emailMaxLengthError.style.display = "none"
         return false
     }
     else {
         emailRequiredError.style.display = "none"
+        emailMaxLengthError.style.display = "none"
         if (email.match(email_regex)) {
+            if (email.length > 50) {
+                emailInvalidError.style.display = "none"
+                emailMaxLengthError.style.display = "block"
+                return false
+            }
             emailInvalidError.style.display = "none"
             return email
         } else {
@@ -133,12 +157,13 @@ function submitForm() {
     const gender = genderValidation();
     const hobby = hobbyValidation();
     const technology = technologyValidation();
+    const fullPhoneNo = `${document.querySelector(".iti__selected-flag").title.split(' ').slice(-1)[0]} ${phoneNo}`
     if (firstName && lastName && email && phoneNo && gender && hobby && technology) {
         const data = {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            phoneNo: phoneNo,
+            phoneNo: fullPhoneNo,
             gender: gender,
             hobby: hobby,
             technology: technology

@@ -1,7 +1,7 @@
 let keys = Object.keys(localStorage), i = keys.length;
 while (i--) {
     value = JSON.parse(localStorage.getItem(keys[i]))
-    let html = `<tr draggable="true" ondragstart="start()"  ondragover="dragover()">
+    let html = `<tr draggable="true" ondragstart="start()" ondragover="dragover()">
                     <td><input class="form-check-input" type="checkbox" onclick="selectData()" name="checkbox" value="${value.email}" id="${value.email}"></td>
                     <td>${value.firstName}</td>
                     <td>${value.lastName}</td>
@@ -18,14 +18,15 @@ function start() {
 }
 function dragover() {
     var e = event;
-    e.preventDefault();
 
     let children = Array.from(e.target.parentNode.parentNode.children);
+    if (children.indexOf(e.target.parentNode) > children.indexOf(row)) {
+        e.target.parentNode.after(row);
+    }
+    else {
+        e.target.parentNode.before(row);
+    }
 
-    // if (children.indexOf(e.target.parentNode) > children.indexOf(row))
-    //     e.target.parentNode.after(row);
-    // else
-    //     e.target.parentNode.before(row);
 }
 
 
